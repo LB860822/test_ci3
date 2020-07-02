@@ -10,7 +10,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        search-for: [lindy, picotin, rodeo]
     steps:
     - uses: actions/checkout@v2
     - name: Check firefox and install geckodriver
@@ -53,7 +55,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Run and update
       run: |
-        python hermes.py -s lindy
+        python hermes.py -s ${{ matrix.search-for }}
     - name: 'Send mail'
       if: ${{ success() }}
       uses: dawidd6/action-send-mail@master
