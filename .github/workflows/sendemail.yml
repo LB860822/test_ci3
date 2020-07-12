@@ -48,11 +48,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install lxml selenium requests
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Run and update
       run: |
-        python hermes.py -s picotin
+        python gethermes.py -s lindy,picotin
     - name: 'Send mail'
       if: ${{ success() }}
       uses: dawidd6/action-send-mail@master
